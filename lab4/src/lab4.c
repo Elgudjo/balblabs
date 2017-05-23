@@ -22,12 +22,11 @@ int main()
        тельского процесса (в каждом из 
        процессов) */
 
-    pid = getpid();
-    ppid = getppid();
-
     if(fork() == -1){
     /* ошибка */
     } else if (pid == 0){
+        pid = getpid();
+        ppid = getppid();
     /* ребенок */
       a = pr_a(a);
     /* Печатаем значения PID, PPID и вычислен-
@@ -35,6 +34,8 @@ int main()
        процессов) */
       printf("My pid = %d, my ppid = %d,result a = %d,result b = %d\n",(int)pid,(int)ppid,a,b);
     } else {
+        pid = getpid();
+        ppid = getppid();
     /* родитель */
       b = pr_b(b);
     /* Печатаем значения PID, PPID и вычислен-
