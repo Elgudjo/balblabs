@@ -79,38 +79,22 @@ uninstall:
 int main()
 {
     pid_t pid, ppid;
-    int a =  0; 
+    int a =  0;
     int b =  100; 
 
-    /* При успешном создании нового процесса
-       с этого места псевдопараллельно 
-       начинают работать два процесса: старый
-       и новый */
-    /* Узнаем идентификаторы роди-
-       тельского процесса (в каждом из 
-       процессов) */
-
-    if(fork() == -1){
-    /* ошибка */
-    } else if (pid == 0){
-        pid = getpid();
-        ppid = getppid();
-    /* ребенок */
-      a = pr_a(a);
-    /* Печатаем значения PID, PPID и вычислен-
-       ное значение переменной a,b (в каждом из
-       процессов) */
-      printf("My pid = %d, my ppid = %d,result a = %d,result b = %d\n",(int)pid,(int)ppid,a,b);
-    } else {
-        pid = getpid();
-        ppid = getppid();
-    /* родитель */
-      b = pr_b(b);
-    /* Печатаем значения PID, PPID и вычислен-
-       ное значение переменной a,b (в каждом из
-       процессов) */
-      printf("My pid = %d, my ppid = %d,result a = %d,result b = %d\n",(int)pid,(int)ppid,a,b);
+    int children = fork();
+    if(children == -1){
+        return 1;
     }
+    
+        pid = getpid();
+        ppid = getppid();
+    if(children == 0){
+           b = pr_b(b);
+    } else {
+        a = pr_a(a);
+    }
+    printf("My pid = %d, my ppid = %d,result a = %d,result b = %d\n",(int)pid,(int)ppid,a,b);
     return 0;
 }
 ```
@@ -176,4 +160,4 @@ CMD lab4
 
 ### ascinema запись
 
-[![asciicast](https://asciinema.org/a/5t7qr1on2p1n6rm7zkg4mahrd.png)](https://asciinema.org/a/5t7qr1on2p1n6rm7zkg4mahrd)
+[![asciicast](https://asciinema.org/a/1qeugiakz4t37o26r4o9gel4m.png)](https://asciinema.org/a/1qeugiakz4t37o26r4o9gel4m)

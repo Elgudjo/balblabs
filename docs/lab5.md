@@ -44,16 +44,16 @@ docker run --rm bloodyfoxy/balblabs:lab5
 int main(int argc, const char * argv[], const char *envp[])
 {
     char data[8000];
+    strcat(data, "CLI arguments\n" );
+    for (int i=0; i<argc; i++) {
+        strcat(data, argv[i]);
+        strcat(data, "\n");
+    }
     strcat(data, "Enviroment variables\n" );
     for (int i=0; envp[i]; i++) {
         strcat(data, envp[i]);
         strcat(data, "\n");
         
-    }
-    strcat(data, "CLI arguments\n" );
-    for (int i=0; i<argc; i++) {
-        strcat(data, argv[i]);
-        strcat(data, "\n");
     }
         //файловые дескрипторы
     int filedesc = open("lab5.txt", O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IXUSR | S_IWUSR | S_IRGRP | S_IXGRP | S_IXOTH);
@@ -67,6 +67,7 @@ int main(int argc, const char * argv[], const char *envp[])
 
 ```
 #!/bin/bash
+# Посылаем аргументы
 lab5 First 2nd tHiRd arg kek lol thats boring
 ls -l -h
 cat lab5.txt
@@ -119,4 +120,4 @@ ENTRYPOINT ["start.sh"]
 
 ### asciinema запись
 
-[![asciicast](https://asciinema.org/a/agolupfq6cpjsrf67d77tkred.png)](https://asciinema.org/a/agolupfq6cpjsrf67d77tkred)
+[![asciicast](https://asciinema.org/a/ee939gonygrifwqwf7r2zyqud.png)](https://asciinema.org/a/ee939gonygrifwqwf7r2zyqud)
